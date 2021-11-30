@@ -1,0 +1,22 @@
+stages:
+  - buildImage
+
+variables:
+  GIT_STRATEGY: clone
+
+buildDockerImage:
+  stage: buildImage
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+
+  script:
+    - registryAddress="tapsellorg"
+    - imageName="$android-sdk:$CI_COMMIT_TAG"
+    - echo "$imageName"
+    # - mv $KANIKO_CONFIG /kaniko/.docker/config.json
+    # - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $imageName
+  
+  only:
+    - tags
+  tags: hetzner
