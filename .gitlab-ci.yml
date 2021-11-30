@@ -18,5 +18,9 @@ buildDockerImage:
     # - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $imageName
   
   only:
-    - tags
-  tags: hetzner
+    - master
+    - /v[0-9|\.]+[-a-z0-9]*/
+  except:
+    - branches
+  tags: 
+    - hetzner
