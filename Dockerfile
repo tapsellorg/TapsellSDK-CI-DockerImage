@@ -20,15 +20,15 @@ ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
 
-RUN wget --output-document=gradle-${GRADLE_VERSION}-all.zip https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip \
+RUN wget --output-document=gradle-${GRADLE_VERSION}-all.zip https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip >/dev/null 2>&1 \
 	&& mkdir -p /opt/gradle \
 	&& unzip -q gradle-${GRADLE_VERSION}-all.zip -d /opt/gradle \
 	&& rm ./gradle-${GRADLE_VERSION}-all.zip \
 	&& mkdir -p ${ANDROID_HOME} \
-	&& wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS_VERSION}.zip \
+	&& wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS_VERSION}.zip >/dev/null 2>&1 \
 	&& unzip -q ./android-sdk.zip -d ${ANDROID_HOME} \
 	&& rm ./android-sdk.zip \
-	&& wget --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
+	&& wget --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz >/dev/null 2>&1 \
 	&& tar xf flutter.tar.xz -C /opt \
 	&& rm ./flutter.tar.xz \
 	&& mkdir -p ~/.android \
