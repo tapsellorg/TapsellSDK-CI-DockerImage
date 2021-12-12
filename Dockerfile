@@ -52,9 +52,6 @@ ADD packages.txt .
 RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < ./packages.txt && \
     ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES} >/dev/null 2>&1
 
-RUN npm install -g cordova \
-	&& npm install --save-dev ci-publish
-
 RUN npm install -g react-native-cli
 
 # install .net Core SDK
