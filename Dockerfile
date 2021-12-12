@@ -22,11 +22,11 @@ ENV LANG=en_US.UTF-8 \
 
 RUN wget --output-document=gradle-${GRADLE_VERSION}-all.zip https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip \
 	&& mkdir -p /opt/gradle \
-	&& unzip gradle-${GRADLE_VERSION}-all.zip -d /opt/gradle \
+	&& unzip -q gradle-${GRADLE_VERSION}-all.zip -d /opt/gradle \
 	&& rm ./gradle-${GRADLE_VERSION}-all.zip \
 	&& mkdir -p ${ANDROID_HOME} \
 	&& wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS_VERSION}.zip \
-	&& unzip ./android-sdk.zip -d ${ANDROID_HOME} \
+	&& unzip -q ./android-sdk.zip -d ${ANDROID_HOME} \
 	&& rm ./android-sdk.zip \
 	&& wget --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
 	&& tar xf flutter.tar.xz -C /opt \
@@ -46,7 +46,7 @@ RUN cd ${ANDROID_HOME}/tools \
   && sed -ie 's%^CLASSPATH=.*%\0:$APP_HOME/jaxb_lib/*%' bin/sdkmanager bin/avdmanager
 
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
-	&& ${ANDROID_HOME}/tools/bin/sdkmanager --update
+	&& ${ANDROID_HOME}/tools/bin/sdkmanager --update >/dev/null 2>&1
 
 ADD packages.txt .
 RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < ./packages.txt && \
