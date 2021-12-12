@@ -8,11 +8,11 @@ ARG FLUTTER_VERSION=v1.12.13+hotfix.7-stable
 
 ENV ANDROID_HOME "/android-sdk-linux"
 
-RUN apt-get update \
-	&& apt-get upgrade -y \
+RUN apt-get update >/dev/null 2>&1 \
+	&& apt-get upgrade -y >/dev/null 2>&1 \
 	&& apt-get install -y curl \
 	&& curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
-	&& apt-get install -y git wget unzip jq zip openjdk-11-jdk locales nodejs \
+	&& apt-get install -y git wget unzip jq zip openjdk-11-jdk locales nodejs >/dev/null 2>&1 \
 	&& apt-get clean \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
@@ -50,7 +50,7 @@ RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
 
 ADD packages.txt .
 RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < ./packages.txt && \
-    ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES}
+    ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES} >/dev/null 2>&1
 
 RUN npm install -g cordova \
 	&& npm install --save-dev ci-publish
