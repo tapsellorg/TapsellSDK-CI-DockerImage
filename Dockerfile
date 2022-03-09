@@ -8,11 +8,11 @@ ARG FLUTTER_VERSION=v1.12.13+hotfix.7-stable
 
 ENV ANDROID_HOME "/android-sdk-linux"
 
-RUN apt-get update \
-	&& apt-get upgrade -y \
+RUN apt-get update >/dev/null 2>&1 \
+	&& apt-get upgrade -y >/dev/null 2>&1 \
 	&& apt-get install -y curl \
 	&& curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
-	&& apt-get install -y git wget unzip jq zip openjdk-11-jdk locales nodejs \
+	&& apt-get install -y git wget unzip jq zip openjdk-11-jdk locales nodejs >/dev/null 2>&1 \
 	&& apt-get clean \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
@@ -20,15 +20,15 @@ ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
 
-RUN wget --output-document=gradle-${GRADLE_VERSION}-all.zip https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip \
+RUN wget --output-document=gradle-${GRADLE_VERSION}-bin.zip https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip >/dev/null 2>&1 \
 	&& mkdir -p /opt/gradle \
-	&& unzip gradle-${GRADLE_VERSION}-bin.zip -d /opt/gradle \
+	&& unzip -q gradle-${GRADLE_VERSION}-bin.zip -d /opt/gradle \
 	&& rm ./gradle-${GRADLE_VERSION}-bin.zip \
 	&& mkdir -p ${ANDROID_HOME} \
-	&& wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS_VERSION}.zip \
-	&& unzip ./android-sdk.zip -d ${ANDROID_HOME} \
+	&& wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS_VERSION}.zip >/dev/null 2>&1 \
+	&& unzip -q ./android-sdk.zip -d ${ANDROID_HOME} \
 	&& rm ./android-sdk.zip \
-	&& wget --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz \
+	&& wget --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_${FLUTTER_VERSION}.tar.xz >/dev/null 2>&1 \
 	&& tar xf flutter.tar.xz -C /opt \
 	&& rm ./flutter.tar.xz \
 	&& mkdir -p ~/.android \
@@ -46,14 +46,11 @@ RUN cd ${ANDROID_HOME}/tools \
   && sed -ie 's%^CLASSPATH=.*%\0:$APP_HOME/jaxb_lib/*%' bin/sdkmanager bin/avdmanager
 
 RUN yes | ${ANDROID_HOME}/tools/bin/sdkmanager --licenses \
-	&& ${ANDROID_HOME}/tools/bin/sdkmanager --update
+	&& ${ANDROID_HOME}/tools/bin/sdkmanager --update >/dev/null 2>&1
 
 ADD packages.txt .
 RUN while read -r package; do PACKAGES="${PACKAGES}${package} "; done < ./packages.txt && \
-    ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES}
-
-RUN npm install -g cordova \
-	&& npm install --save-dev ci-publish
+    ${ANDROID_HOME}/tools/bin/sdkmanager ${PACKAGES} >/dev/null 2>&1
 
 RUN npm install -g react-native-cli
 
