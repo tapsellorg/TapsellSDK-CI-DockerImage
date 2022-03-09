@@ -3,7 +3,7 @@ FROM ubuntu:18.04
 MAINTAINER tapsellprg <technical.tapsell@gmail.com>
 
 ARG SDK_TOOLS_VERSION=4333796
-ARG GRADLE_VERSION=6.7.1
+ARG GRADLE_VERSION=7.2
 ARG FLUTTER_VERSION=v1.12.13+hotfix.7-stable
 
 ENV ANDROID_HOME "/android-sdk-linux"
@@ -20,10 +20,10 @@ ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8
 
-RUN wget --output-document=gradle-${GRADLE_VERSION}-all.zip https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-all.zip >/dev/null 2>&1 \
+RUN wget --output-document=gradle-${GRADLE_VERSION}-bin.zip https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip >/dev/null 2>&1 \
 	&& mkdir -p /opt/gradle \
-	&& unzip -q gradle-${GRADLE_VERSION}-all.zip -d /opt/gradle \
-	&& rm ./gradle-${GRADLE_VERSION}-all.zip \
+	&& unzip -q gradle-${GRADLE_VERSION}-bin.zip -d /opt/gradle \
+	&& rm ./gradle-${GRADLE_VERSION}-bin.zip \
 	&& mkdir -p ${ANDROID_HOME} \
 	&& wget --output-document=android-sdk.zip https://dl.google.com/android/repository/sdk-tools-linux-${SDK_TOOLS_VERSION}.zip >/dev/null 2>&1 \
 	&& unzip -q ./android-sdk.zip -d ${ANDROID_HOME} \
