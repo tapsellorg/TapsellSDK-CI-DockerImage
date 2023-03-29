@@ -3,6 +3,7 @@ FROM ubuntu:22.04
 LABEL maintainer tapsellorg
 
 ENV KOTLIN_VERSION "1.8.10"
+ENV GRADLE_VERSION "7.6.1"
 ENV NDK_VERSION r21d
 ENV DEBIAN_FRONTEND=noninteractive
 ENV ANDROID_HOME "/android-sdk-linux"
@@ -14,6 +15,12 @@ RUN apt-get -qq update && apt-get install -y locales \
     && apt-get install -y wget \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.UTF-8
+
+#install gradle
+RUN wget https://downloads.gradle-dn.com/distributions/gradle-${GRADLE_VERSION}-bin.zip
+RUN unzip gradle-${GRADLE_VERSION}-bin.zip
+ENV GRADLE_HOME /gradle-${GRADLE_VERSION}
+ENV PATH $PATH:/gradle-${GRADLE_VERSION}/bin
 
 # install necessary packages
 RUN apt-get install -qqy --no-install-recommends \
