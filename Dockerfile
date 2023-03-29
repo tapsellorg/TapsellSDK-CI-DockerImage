@@ -16,12 +16,6 @@ RUN apt-get -qq update && apt-get install -y locales \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.UTF-8
 
-#install gradle
-RUN wget https://downloads.gradle-dn.com/distributions/gradle-${GRADLE_VERSION}-bin.zip
-RUN unzip gradle-${GRADLE_VERSION}-bin.zip
-ENV GRADLE_HOME /gradle-${GRADLE_VERSION}
-ENV PATH $PATH:/gradle-${GRADLE_VERSION}/bin
-
 # install necessary packages
 RUN apt-get install -qqy --no-install-recommends \
 	curl \
@@ -33,6 +27,12 @@ RUN apt-get install -qqy --no-install-recommends \
 	nodejs \
 	npm \
 	&& rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+#install gradle
+RUN wget https://downloads.gradle-dn.com/distributions/gradle-${GRADLE_VERSION}-bin.zip
+RUN unzip gradle-${GRADLE_VERSION}-bin.zip
+ENV GRADLE_HOME /gradle-${GRADLE_VERSION}
+ENV PATH $PATH:/gradle-${GRADLE_VERSION}/bin
 
 # download and unzip latest command line tools
 RUN export CMD_LINE_TOOLS_VERSION="$(curl -s https://developer.android.com/studio/index.html | grep -oP 'commandlinetools-linux-\K\d+' | uniq)" && \
