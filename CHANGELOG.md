@@ -3,6 +3,17 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.1.0] - 2023-03-29
+
+### Changed
+- Updated android sdk version to `33.0.0` 
+- Replaced static Android SDK tools with the latest dynamic Android SDK command-line tools from [Android Developer](https://developer.android.com/studio/index.html)
+- Updated flutter version to `3.7.8`
+
+### Added
+- Added Kotlin Native installation
+- Added NDK installation
+
 ## [4.0.0] - 2022-05-08
 
 ### Changed
