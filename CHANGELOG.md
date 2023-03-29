@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Updated android sdk version to `33.0.0` 
 - Replaced static Android SDK tools with the latest dynamic Android SDK command-line tools from [Android Developer](https://developer.android.com/studio/index.html)
 - Updated flutter version to `3.7.8`
+- Updated dotnet version to `6.0`
 
 ### Added
 - Added Kotlin Native installation
