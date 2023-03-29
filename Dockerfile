@@ -71,7 +71,7 @@ RUN curl -s https://packages.microsoft.com/config/ubuntu/22.04/packages-microsof
 	dpkg -i packages-microsoft-prod.deb && \
 	apt-get update && \
 	apt-get install apt-transport-https -y && \
-	apt-get install dotnet-sdk-3.1 -y && \
+	apt-get install dotnet-sdk-6.0 -y && \
 	rm packages-microsoft-prod.deb
 
 # Kotlin/Native compiler
