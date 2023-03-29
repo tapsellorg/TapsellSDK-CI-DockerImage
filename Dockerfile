@@ -1,4 +1,4 @@
-FROM ubuntu:23.04
+FROM ubuntu:22.04
 
 LABEL maintainer tapsellorg
 
@@ -67,7 +67,7 @@ RUN npm install -g react-native-cli
 RUN npm install -g cordova
 
 # install .net Core SDK
-RUN curl -s https://packages.microsoft.com/config/ubuntu/23.04/packages-microsoft-prod.deb -o packages-microsoft-prod.deb && \
+RUN curl -s https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -o packages-microsoft-prod.deb && \
 	dpkg -i packages-microsoft-prod.deb && \
 	apt-get update && \
 	apt-get install apt-transport-https -y && \
