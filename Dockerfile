@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 LABEL maintainer tapsellorg
 
-ENV KOTLIN_VERSION "1.8.10"
+ENV KOTLIN_VERSION "1.8.21"
 ENV GRADLE_VERSION "7.6.1"
 ENV NDK_VERSION r21d
 ENV DEBIAN_FRONTEND=noninteractive
@@ -13,6 +13,7 @@ RUN mkdir -p ${ANDROID_HOME}
 
 RUN apt-get -qq update && apt-get install -y locales \
     && apt-get install -y wget \
+    && apt-get install openssh-client -y wget \
 	&& localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 ENV LANG en_US.UTF-8
 
