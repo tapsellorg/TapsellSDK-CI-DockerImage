@@ -21,4 +21,4 @@ buildDockerImage:
   
   only:
     - master
-    - /v[0-9|\.]+[-a-z0-9]*/
+    - tags
