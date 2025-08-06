@@ -1,100 +1,16 @@
-# gitlab-ci-android
+![GitHub License](https://img.shields.io/github/license/tapsellorg/TapsellSDK-CI-DockerImage)
+![Docker Image Size](https://img.shields.io/docker/image-size/tapsellorg/android-sdk)
 
-https://hub.docker.com/r/inovex/gitlab-ci-android/
+# Android Docker Image
 
-```
-image: behdad222/android-sdk:v1
+A minimal, Ubuntu based and production-ready Android build environment packed into a lightweight Docker image.
 
+- About 600MB in size
 
-before_script:
+- Supports specific Android SDK and JDK versions (e.g., jdk11-sdk24)
 
-  - chmod +x ./gradlew
-  
-  - export VERSION_NAME=`egrep '^[[:blank:]]+sdkVersion[[:blank:]]'  ./build.gradle | awk '{print $3}' | sed s/\'//g`
-  
-  - touch ./info.txt
-  - echo "Build date          $(date)"                >> ./info.txt
-  - echo "SDK version         ${VERSION_NAME}"        >> ./info.txt
-  - echo "Git branch          ${CI_COMMIT_REF_NAME}"  >> ./info.txt
-  - echo "Git commit          ${CI_COMMIT_SHA}"       >> ./info.txt
-  - echo "Gitlab pipeline     ${CI_PIPELINE_ID}"      >> ./info.txt
-  
+- Fast and lightweight — optimized for CI/CD environments
 
-stages:
-  - code_quality
-  - build
-  - release
-  - publish
-  
-  
-cache:
-  key: ${CI_PROJECT_ID}
-  paths:
-  - .gradle/
+- Pre-installed Kotlin compiler for running Kotlin scripts
 
-
-static_analysis:
-  stage: code_quality
-  
-  script:
-    - ./gradlew checkstyle
-    
-  allow_failure: true
-    
-  artifacts:
-    name: "reports_${CI_PROJECT_NAME}_${CI_BUILD_REF_NAME}"
-    
-    paths:
-      - ./build/reports/checkstyle/checkstyle.html
-      - ./info.txt
-      
-    when: always
-      
-
-build-sdk-android:
-  stage: build
-  
-  script:
-    - ./gradlew assembleAndroid
-    - mv ./sdk/build/outputs/aar/sdk-android-debug.aar ./sdk-android-debug-v$VERSION_NAME.aar
-    
-  artifacts:
-    paths:
-    - ./*.aar
-    - ./info.txt
-
-
-build-app-android:
-  stage: build
-  
-  script:
-    - ./gradlew assembleDebug
-    - mv ./app/build/outputs/apk/debug/app-debug.apk ./app-android-debug-v$VERSION_NAME.apk
-    
-  artifacts:
-    paths:
-    - ./*.apk
-    - ./info.txt
-
-
-release-sdk-android:
-  stage: release
-  
-  only:
-    - master
-    - release
-    
-  script:
-    - ./gradlew assembleAndroidRelease
-    - mv ./sdk/build/outputs/aar/sdk-android-release.aar ./sdk-android-release-v$VERSION_NAME.aar
-    - mv ./sdk/build/outputs/logs/manifest-merger-android-release-report.txt .
-    - mv ./sdk/build/outputs/mapping/android/release/* .
-    
-  artifacts:
-    paths:
-    - ./*.aar
-    - ./*.txt
-  
-  when: manual
-
-```
+- View on [Docker Hub](https://hub.docker.com/r/tapsellorg/android-sdk/)
