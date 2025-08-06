@@ -3,7 +3,7 @@
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.0.0@jdk11-sdk34] - 2025-08-06
+## [5.0.0-jdk11-sdk34] - 2025-08-06
 
 - Upgraded base image to `ubuntu:24.04`.
 - Simplified package installation, focusing on essential tools like `curl`, `unzip`, `git`, and `openjdk-11-jdk`.
@@ -12,7 +12,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Minimize Android SDK components to `"platform-tools"`, `"platforms;android-34"`, and `"build-tools;34.0.0"`.
 - Introduce all execution `PATH`s
 - Added Kotlin compiler `2.1.10` for running Kotlin scripts.
-- Versioning Scheme has changed from this release onwards to `5.0.0@jdk11-sdk34`
 - This is based on [Tiny-Android](https://github.com/beigirad/tiny-android-docker)
 
 
