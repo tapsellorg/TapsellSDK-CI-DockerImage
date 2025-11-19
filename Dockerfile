@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -qqy --no-install-recommends \
     curl \
     unzip \
     git \
+    zip \
+    unzip \
     openjdk-17-jdk \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
