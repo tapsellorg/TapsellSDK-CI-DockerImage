@@ -9,7 +9,6 @@ buildDockerImage:
   stage: buildImage
   only:
     refs:
-      - master
       - tags
   image: docker:28.5.2
   services:
