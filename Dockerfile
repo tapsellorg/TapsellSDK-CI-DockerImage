@@ -31,8 +31,8 @@ RUN yes | sdkmanager --sdk_root=${ANDROID_HOME} --licenses
 # Install SDK components (platforms, build-tools, etc.)
 RUN sdkmanager --sdk_root=${ANDROID_HOME}\
     "platform-tools" \
-    "platforms;android-34" \
-    "build-tools;34.0.0"
+    "platforms;android-35" \
+    "build-tools;35.0.1"
 ENV PATH=$PATH:$ANDROID_HOME/platform-tools
 
 # Install Kotlin compiler for running kotlin scripts
