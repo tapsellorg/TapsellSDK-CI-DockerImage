@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -qqy --no-install-recommends \
 ENV ANDROID_HOME='/android-sdk'
 
 # Download and install Android SDK Command-line tools
-ARG CMD_TOOLS_VERSION=13114758
+ARG CMD_TOOLS_VERSION=16111833
 ARG CMD_FILE_NAME=commandlinetools-linux-${CMD_TOOLS_VERSION}_latest.zip
 ARG CMD_DIR=$ANDROID_HOME/cmdline-tools
 RUN curl -o $CMD_FILE_NAME https://dl.google.com/android/repository/$CMD_FILE_NAME \
